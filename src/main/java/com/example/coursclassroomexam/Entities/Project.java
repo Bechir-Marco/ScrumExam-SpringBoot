@@ -19,10 +19,16 @@ import java.util.Set;
 public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType. IDENTITY)
-    int id;
+
+    Integer id;
     String title;
     String description;
 
     @ManyToMany(cascade = CascadeType.ALL)
-    List <User> userList;
+            @JsonIgnore
+    @JoinColumn(name = "id", insertable = false, updatable = false)
+    Set <User> userList;
+
+    @OneToMany (cascade = CascadeType.ALL,mappedBy = "project",fetch = FetchType.EAGER)
+    List <Sprint> sprintList;
 }

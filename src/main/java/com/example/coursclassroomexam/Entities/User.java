@@ -7,6 +7,7 @@ import lombok.experimental.FieldDefaults;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -18,17 +19,18 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType. IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     int id;
-    String fName ;
+    String FName ;
     String email;
     String IName;
     String pwd;
     @Enumerated(EnumType.STRING)
     Role role;
 
-    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "userList")
+    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "userList")
             @JsonIgnore
-    List <Project> projectList;
+    Set<Project> projectList;
 
     @OneToMany (cascade = CascadeType.ALL)
             @JsonIgnore

@@ -3,10 +3,7 @@ package com.example.coursclassroomexam.Aspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -34,4 +31,9 @@ public class Logging {
 //            log.info("Début Execution : " + name + " : ");
 //        }
 //    }
+@AfterReturning("execution(void com.example..*(..))")
+public void logMethodEntry(JoinPoint joinPoint) {
+    String name = joinPoint.getSignature().getName();
+    log.info("With success " + name );
+}
 }

@@ -19,7 +19,12 @@ import java.util.List;
 public class Sprint implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType. IDENTITY)
-    Integer id ;
+    int id ;
    String description;
-    Date startDate;
+    @Temporal(TemporalType.DATE)
+   Date startDate;
+    @ManyToOne(cascade = CascadeType.ALL)
+            @JsonIgnore
+    Project project;
+
 }
